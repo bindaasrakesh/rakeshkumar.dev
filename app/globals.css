@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --accent-color: #1d4ed8;
+}
+
+body {
+  font-family: ui-sans-serif, system-ui, sans-serif;
+  background-color: rgb(250 250 250);
+  color: rgb(23 23 23);
+}
