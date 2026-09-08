@@ -2,6 +2,8 @@ export interface SiteConfig {
   name: string;
   title: string;
   tagline: string;
+  headline: string;
+  support: string;
   yearsOfExperience: string;
   email: string;
   linkedin: string;
@@ -15,15 +17,45 @@ export interface Skill {
   name: string;
 }
 
+export interface SkillGroup {
+  label: string;
+  items: string[];
+}
+
 export interface ImpactItem {
+  value: string;
   description: string;
+  caption?: string;
 }
 
 export interface CaseStudy {
+  id: string;
+  label: string;
   title: string;
   problem: string;
   owned: string;
   outcome: string;
+  tech: string[];
+  imageLabel: string;
+}
+
+export interface CompactProject {
+  title: string;
+  description: string;
+  tech: string[];
+  highlight?: boolean;
+}
+
+export interface ArchiveProject {
+  project: string;
+  role: string;
+  stack: string;
+  notes: string;
+}
+
+export interface HeaderLink {
+  label: string;
+  href: string;
 }
 
 export const siteConfig: SiteConfig = {
@@ -31,13 +63,16 @@ export const siteConfig: SiteConfig = {
   title: "Lead Software Engineer (Frontend / React)",
   tagline:
     "Lead Frontend engineer building scalable React / Next.js platforms — architecture, mentoring, and measurable performance.",
+  headline: "I build and ship scalable React & Next.js platforms that enterprises run on.",
+  support:
+    "Eleven years leading frontend workstreams — architecture, design systems, and performance work that takes Lighthouse from the teens to 90+.",
   yearsOfExperience: "11+ years",
   email: "rakesh.jeet09@gmail.com",
   linkedin: "https://www.linkedin.com/in/bindaasrakesh/",
   github: "https://github.com/bindaasrakesh",
   location: "Noida, India",
-  resumePath: null,
-  accentColor: "#1d4ed8",
+  resumePath: "/RakeshKumar_LeadSoftwareEngineer_Resume.pdf",
+  accentColor: "#2a9a8f",
 };
 
 export const skills: Skill[] = [
@@ -47,68 +82,207 @@ export const skills: Skill[] = [
   { name: "Tailwind" },
 ];
 
+export const skillGroups: SkillGroup[] = [
+  {
+    label: "Frontend",
+    items: ["React.js", "Next.js", "TypeScript", "Tailwind CSS"],
+  },
+  {
+    label: "Architecture",
+    items: ["Redux Toolkit", "React Query", "GraphQL", "Design systems"],
+  },
+  {
+    label: "Quality",
+    items: ["Performance / Lighthouse", "Accessibility", "Testing / Storybook", "Mentoring"],
+  },
+];
+
 export const impactItems: ImpactItem[] = [
   {
-    description:
-      "Led a 3-5 engineer frontend workstream on project delivery: component architecture, PR standards, estimation, and collaboration with Java, .NET, Salesforce, and mobile teams.",
+    value: "3–5",
+    description: "Engineers per frontend workstream led — planning, reviews, and delivery.",
   },
   {
-    description:
-      "Trained 20+ engineers (2022-2024) on a structured path (HTML/CSS → JavaScript → React); cut new UI joiner ramp-up from ~1 month to ~2 weeks, raised code quality via reviews/standards, and upskilled React/Angular engineers on UI fundamentals to reduce dependency on dedicated UI support.",
+    value: "20+",
+    description: "Engineers mentored; ramp-up ~1 month → ~2 weeks.",
   },
   {
-    description:
-      "Improved Google PageSpeed/Lighthouse on a Hippo CMS (Couchbase) homepage from ~10-15 to 90+ using code splitting, lazy loading, unused CSS/JS removal, image optimization, FCP/TBT-focused loading, and async/defer for non-critical CSS; applied the same playbook across 10+ WordPress, Hippo CMS, React, and Next.js experiences.",
+    value: "90+",
+    description: "Lighthouse / PageSpeed, up from ~10–15.",
+    caption: "From the Couchbase / Hippo CMS performance pass →",
   },
 ];
 
+/** Featured case studies (homepage primary stories). */
 export const caseStudies: CaseStudy[] = [
   {
-    title: "Energy & Water Monitoring Platform",
-    problem:
-      "Enterprise needed real-time utility monitoring across multiple sites with complex role-based access and integrated analytics.",
+    id: "enerva",
+    label: "Case 01 · Enterprise",
+    title: "Enerva — Energy & Water Monitoring Platform",
+    problem: "Utility data spread across many sites with no single live view.",
     owned:
-      "Led a 5-engineer React (JavaScript) frontend for an enterprise utility-monitoring SPA with Redux, MUI, Azure AD (MSAL) auth, Power BI dashboards, Formik/Yup forms, and charts/tables; shipped multi-environment builds (dev/stage/prod).",
-    outcome:
-      "Delivered production-ready SPA with secure auth, dynamic dashboards, and complex form validation across multiple deployment environments.",
+      "Frontend architecture, role-based access, Power BI embedding, multi-env delivery.",
+    outcome: "Reporting cycle cut from days to a live dashboard.",
+    tech: ["React", "Redux", "MUI", "Azure AD", "Power BI"],
+    imageLabel: "Site-level consumption dashboard",
   },
   {
-    title: "Event Booking Marketplace",
-    problem:
-      "Service booking platform needed end-to-end discover–book–pay–chat flows with real-time scheduling and payment integration.",
+    id: "booga",
+    label: "Case 02 · Marketplace",
+    title: "Booga — Event Booking Marketplace",
+    problem: "Discovery, payments, and communications lived in silos.",
     owned:
-      "Led a 6-engineer React (JavaScript) frontend for a service booking marketplace with AWS Amplify auth, Redux Toolkit, FullCalendar scheduling, Stripe payments, Firebase, and Twilio Conversations chat; Formik/Yup forms and i18n; shipped multi-env builds (dev/stage/prod) for discover–book–pay–chat flows.",
-    outcome:
-      "Shipped complete marketplace with authentication, calendar-based booking, integrated payments, real-time chat, and internationalization.",
+      "Booking flow, state architecture, Stripe + Twilio integration, multi-env delivery.",
+    outcome: "One flow from search to ticket; smoother checkout path.",
+    tech: ["React", "Redux Toolkit", "AWS Amplify", "Stripe", "Firebase", "Twilio"],
+    imageLabel: "Booking & checkout flow",
   },
   {
-    title: "Food Recipe Web App (Next.js)",
+    id: "couchbase",
+    label: "Case 03 · Performance",
+    title: "Couchbase / Hippo CMS Performance",
     problem:
-      "Recipe platform needed SEO-optimized dynamic content for recipes and users while maintaining fast static pages.",
+      "Homepage PageSpeed / Lighthouse stuck around 10–15 — heavy CSS/JS, weak FCP/TBT, unoptimised images.",
     owned:
-      "Implemented SSR for dynamic recipe posts/user details and SSG for static pages (About, Contact); TypeScript-friendly React patterns and API-integrated content flows.",
-    outcome:
-      "Delivered SEO-friendly recipe platform with server-side rendering for dynamic content and static generation for performance-critical pages.",
+      "Performance pass — code splitting, lazy loading, unused CSS/JS removal, image optimization, FCP/TBT-focused loading.",
+    outcome: "Homepage Lighthouse / PageSpeed lifted from ~10–15 to 90+.",
+    tech: ["Performance", "Lighthouse", "PageSpeed", "Hippo CMS", "Couchbase"],
+    imageLabel: "Before / after performance",
   },
 ];
 
-export interface HeaderLink {
-  label: string;
-  href: string;
-}
+export const adminProjects: CompactProject[] = [
+  {
+    title: "BluXinga & BluTango",
+    description: "React admin for mobile-product operations.",
+    tech: ["UI", "React"],
+  },
+  {
+    title: "Votr Admin",
+    description: "React admin for mobile-product operations.",
+    tech: ["React"],
+  },
+  {
+    title: "Xponent Admin",
+    description: "React admin for mobile-product operations.",
+    tech: ["React"],
+  },
+  {
+    title: "Hyst Admin",
+    description: "React admin for mobile-product operations.",
+    tech: ["React"],
+  },
+  {
+    title: "GFG Admin",
+    description: "React admin for mobile-product operations.",
+    tech: ["React"],
+  },
+  {
+    title: "TFO Wealthfor",
+    description: "React admin for mobile-product operations.",
+    tech: ["React"],
+  },
+  {
+    title: "ADP",
+    description: "React admin + Storybook component system.",
+    tech: ["React", "Storybook"],
+    highlight: true,
+  },
+  {
+    title: "Glassbox Admin",
+    description: "React admin for mobile-product operations.",
+    tech: ["React"],
+  },
+];
+
+export const selectedProjects: CompactProject[] = [
+  {
+    title: "Food Recipe Web App",
+    description: "Server-rendered recipe browsing with a typed data layer.",
+    tech: ["Next.js SSR/SSG", "TypeScript"],
+  },
+  {
+    title: "Busicard",
+    description: "Digital business-card product UI.",
+    tech: ["UI", "React"],
+  },
+  {
+    title: "Spotivity",
+    description: "Built the UI and guided the frontend developer on site-speed / performance fixes.",
+    tech: ["UI", "React", "Performance"],
+  },
+  {
+    title: "guardianvets",
+    description: "Veterinary triage service web app.",
+    tech: ["React"],
+  },
+  {
+    title: "Medical-Shipment",
+    description: "Built the UI and guided the frontend developer on site-speed / performance fixes.",
+    tech: ["UI", "React", "Performance"],
+  },
+  {
+    title: "SKF-cpr",
+    description: "Built the UI and guided the frontend developer on site-speed / performance fixes.",
+    tech: ["UI", "React", "Performance"],
+  },
+];
+
+export const archiveProjects: ArchiveProject[] = [
+  {
+    project: "Algoworks new website",
+    role: "UI + Performance",
+    stack: "HTML · CSS",
+    notes: "Marketing site rebuild + site speed work, 2016",
+  },
+  {
+    project: "brainboxol",
+    role: "UI",
+    stack: "HTML · CSS",
+    notes: "Learning platform interface",
+  },
+  {
+    project: "Avala",
+    role: "UI + CMS",
+    stack: "HTML · WordPress",
+    notes: "Themed content site",
+  },
+  {
+    project: "Mecan",
+    role: "UI + Frontend",
+    stack: "Angular",
+    notes: "Supporting-stack delivery",
+  },
+  {
+    project: "Authvia",
+    role: "UI + Frontend",
+    stack: "JavaScript ES6 · Vue",
+    notes: "Built full payments-messaging UI · responsive · coordinated with Vue developer",
+  },
+];
+
+export const aboutCopy =
+  "I lead frontend teams the way I write code: pick the boring architecture, make the fast path the default, and leave the codebase easier to join than I found it. Based in Noida, working with distributed product teams. Core stack: React & Next.js — also shipped production UI in Angular and Vue when projects required it.";
 
 export function getHeaderLinks(): HeaderLink[] {
-  const links: HeaderLink[] = [];
+  const links: HeaderLink[] = [
+    { label: "Work", href: "#work" },
+    { label: "Impact", href: "#impact" },
+    { label: "About", href: "#about" },
+    { label: "Contact", href: "#contact" },
+  ];
 
   if (siteConfig.resumePath !== null) {
     links.push({ label: "Resume", href: siteConfig.resumePath });
   }
 
-  links.push(
+  return links;
+}
+
+export function getSocialLinks(): HeaderLink[] {
+  return [
     { label: "LinkedIn", href: siteConfig.linkedin },
     { label: "GitHub", href: siteConfig.github },
-    { label: "Email", href: `mailto:${siteConfig.email}` }
-  );
-
-  return links;
+    { label: "Email", href: `mailto:${siteConfig.email}` },
+  ];
 }
