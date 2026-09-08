@@ -115,4 +115,4 @@ npm run build
 
 ---
 
-**Live**: [rakeshkumar.dev](https://rakeshkumar.dev) _(configure your domain)_
+**Live**: [rakeshkumar-dev.vercel.app](https://rakeshkumar-dev.vercel.app/)
